@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="space_cadet">#29335C</color>
-    <color name="pictoral_carmine">#B6174B</color>
-    <color name="earth_yellow">#D7AF70</color>
-    <color name="shadow">#937D64</color>
+    <color name="dark_byzantium">#51344D</color>
+    <color name="eggplant">#685369</color>
+    <color name="midnight">#0B3C49</color>
+    <color name="xanadu">#7D938A</color>
     <color name="daveys_grey">#585B56</color>
+    <cokor name = "light_grey">#D2CBCB</cokor>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
