@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="space_cadet">#29335C</color>
+    <color name="pictoral_carmine">#B6174B</color>
+    <color name="earth_yellow">#D7AF70</color>
+    <color name="shadow">#937D64</color>
+    <color name="daveys_grey">#585B56</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
