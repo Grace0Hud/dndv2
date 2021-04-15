@@ -5,7 +5,7 @@
     <color name="midnight">#0B3C49</color>
     <color name="xanadu">#7D938A</color>
     <color name="daveys_grey">#585B56</color>
-    <cokor name = "light_grey">#D2CBCB</cokor>
+    <color name="light_grey">#D2CBCB</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
