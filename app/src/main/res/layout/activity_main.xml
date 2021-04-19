@@ -104,7 +104,7 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/xanadu"
+        android:back="@color/xanadu"
         android:fontFamily="@font/berner_basisschrift1"
         android:text="sign up"
         android:textAlignment="center"
