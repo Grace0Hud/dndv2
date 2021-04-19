@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".displayScreen"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="403dp"
+        android:layout_height="237dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/corvusLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:contentDescription="@string/logo_description"
+            app:srcCompat="@drawable/corvuslogotransparent" />
+
+        <TextView
+            android:id="@+id/usernameDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/beyond_wonderland"
+            android:text="name"
+            android:textAlignment="center"
+            android:textColor="@color/light_grey"
+            android:textSize="60sp" />
+
+        <TextView
+            android:id="@+id/classLevelDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/berner_basisschrift1"
+            android:text="class | level"
+            android:textAlignment="center"
+            android:textColor="@color/eggplant"
+            android:textSize="40sp" />
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="403dp"
+        android:layout_height="498dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/strDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/berner_basisschrift1"
+                android:text="10 STR"
+                android:textColor="@color/daveys_grey"
+                android:textSize="45sp" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dexDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/berner_basisschrift1"
+                android:text="10 DEX"
+                android:textColor="@color/daveys_grey"
+                android:textSize="45sp" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/conDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/berner_basisschrift1"
+                android:text="10 CON"
+                android:textColor="@color/daveys_grey"
+                android:textSize="45sp" />
+
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="wrap_content" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/intDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/berner_basisschrift1"
+                android:text="10 INT"
+                android:textColor="@color/daveys_grey"
+                android:textSize="45sp" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/wisDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/berner_basisschrift1"
+                android:text="10 WIS"
+                android:textColor="@color/daveys_grey"
+                android:textSize="45sp" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/chaDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/berner_basisschrift1"
+                android:text="10 CHA"
+                android:textColor="@color/daveys_grey"
+                android:textSize="45sp" />
+
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
