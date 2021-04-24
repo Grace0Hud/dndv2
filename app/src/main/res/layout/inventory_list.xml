@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp"
-    tools:context=".MainActivity"
-    android:background="@color/black"
-    android:adjustViewBounds="true"
-    android:scaleType="fitXY"
-    >
-
-
-    <ImageView
-        android:id="@+id/corvusLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="130dp"
-        app:srcCompat="@drawable/corvuslogotransparent"
-        android:contentDescription="@string/logo_description"/>
+    android:background="@color/black">
 
     <TextView
-        android:id="@+id/signin"
+        android:id="@+id/nametitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily= "@font/beyond_wonderland"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        android:textColor="@color/daveys_grey"
+        android:fontFamily="@font/berner_basisschrift1"
+        android:text="NAME:" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:textColor="@color/light_grey"
-        android:textSize="80sp"
         android:textAlignment="center"
         android:layout_gravity="center_horizontal"
-        android:text="@string/signin" />
-
+        android:textSize="40sp"
+        android:background="@drawable/edit_text_shape"
+        android:fontFamily="@font/berner_basisschrift1"
+        android:autofillHints="name" />
     <TextView
         android:id="@+id/emailtitle"
         android:layout_width="match_parent"
@@ -69,7 +66,7 @@
         android:text="PASSWORD:" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/passwordEditText"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -81,34 +78,33 @@
         android:background="@drawable/edit_text_shape"
         android:fontFamily="@font/berner_basisschrift1"
         android:autofillHints="password" />
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="30dp"/>
 
-    <Button
-        android:id="@+id/signinbtn"
-        android:layout_width="330dp"
+    <TextView
+        android:id="@+id/retypetitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/xanadu"
-        android:fontFamily="@font/berner_basisschrift1"
-        android:text="@string/signin"
         android:textAlignment="center"
-        android:textColor="@color/light_grey"
-        android:textSize="40sp" />
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="10dp"/>
-    <Button
-        android:id="@+id/signupbtn"
+        android:textSize="60sp"
+        android:textColor="@color/daveys_grey"
+        android:fontFamily="@font/berner_basisschrift1"
+        android:text="RETYPE:" />
+
+    <EditText
+        android:id="@+id/retypePassword"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/berner_basisschrift1"
-        android:text="@string/sign_up"
-        android:textAlignment="center"
-        android:backgroundTint="@color/eggplant"
+        android:ems="10"
+        android:inputType="textPassword"
         android:textColor="@color/light_grey"
-        android:textSize="40sp" />
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
+        android:textSize="40sp"
+        android:background="@drawable/edit_text_shape"
+        android:fontFamily="@font/berner_basisschrift1"
+        android:autofillHints="password" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 </LinearLayout>
