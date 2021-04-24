@@ -3,4 +3,5 @@
     <string name="logo_description">The word \'corvus\' stylized with a moon-like c and a crow over the s</string>
     <string name="signin">Sign In</string>
     <string name="email">email</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
