@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -53,6 +54,63 @@ public class MainActivity extends AppCompatActivity
                 changeScreen();
             }
         });
+
+        signin = (Button) findViewById(R.id.signinbtn);
+        signin.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                allowUserLogin();
+            }
+        });
+    }
+
+    private void allowUserLogin()
+    {
+        emailET = (EditText)findViewById(R.id.email);
+        passET = (EditText)findViewById(R.id.password);
+        String enteredEmail = emailET.getText().toString();
+        String enteredPass = passET.getText().toString();
+
+        if(TextUtils.isEmpty(enteredEmail))
+        {
+            Toast.makeText(this, "enter your email.", Toast.LENGTH_SHORT).show();
+        }else if(TextUtils.isEmpty(enteredPass))
+        {
+            Toast.makeText(this, "enter your password.", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            loadingbar("Signing you In", "Please wait as you are logged in");
+            mAuth.signInWithEmailAndPassword(enteredEmail, enteredPass)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            if(task.isSuccessful())
+                            {
+                                toDisplayScreen();
+                                Toast.makeText(MainActivity.this, "login successful", Toast.LENGTH_SHORT).show();
+                                loadingbar.dismiss();
+                            }
+                            else
+                            {
+                                String message = task.getException().getMessage();
+                                Toast.makeText(MainActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                                loadingbar.dismiss();
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void toDisplayScreen()
+    {
+        Intent displayIntent = new Intent(this, com.example.dndv2.displayScreen.class);
+        displayIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(displayIntent);
+        finish();
     }
 
 
@@ -81,6 +139,7 @@ public class MainActivity extends AppCompatActivity
                         {
                             signUp();
                         }
+                        dialog.cancel();
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -98,6 +157,7 @@ public class MainActivity extends AppCompatActivity
 
     private void signUp()
     {
+        signUpFinished = false;
         String newEmail = signupEmailET.getText().toString();
         String newPass = signupPassET.getText().toString();
         String retypePass = signUpREPassET.getText().toString();
