@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     private EditText passET, emailET;//signin
 
     private EditText signupPassET, signUpREPassET, signupEmailET, signUpNameET;
+    boolean signUpFinished = false;
 
     private FirebaseAuth mAuth;
     private ProgressDialog loadingbar;
@@ -76,8 +77,10 @@ public class MainActivity extends AppCompatActivity
                 .setCancelable(false)
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        signUp();
-                        dialog.cancel();
+                        while(!signUpFinished)
+                        {
+                            signUp();
+                        }
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -123,14 +126,12 @@ public class MainActivity extends AppCompatActivity
         }
         else
         {
-            loadingbar.setTitle("Creating New Account");
-            loadingbar.setMessage("Please wait while your account is being created");
-            loadingbar.show();
-            loadingbar.setCanceledOnTouchOutside(true);
+            loadingbar("Creating New Account", "Please wait while your account is being created");
 
             mAuth.createUserWithEmailAndPassword(newEmail, newPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+                public void onComplete(@NonNull Task<AuthResult> task)
+                {
                     if(task.isSuccessful())
                     {
                         Toast.makeText(MainActivity.this, "account created", Toast.LENGTH_SHORT).show();
@@ -145,6 +146,15 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
+    }
+
+    public void loadingbar(String title, String message)
+    {
+        loadingbar.setTitle(title);
+        loadingbar.setMessage(message);
+        loadingbar.show();
+        loadingbar.setCanceledOnTouchOutside(true);
+        signUpFinished = true;
     }
 
 }
