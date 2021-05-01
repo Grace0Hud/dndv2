@@ -59,9 +59,13 @@ public class Dice
     private int checkRoll(int newRoll)
     {
         int tempRoll = newRoll;
-        if(tempRoll > sides || tempRoll < 2)
+        if(tempRoll > sides)
         {
-            return roll;
+            return sides;
+        }
+        else if(tempRoll < 2)
+        {
+            return 1;
         }
         return tempRoll;
     }

@@ -54,7 +54,7 @@ public class DiceTests
     {
         Dice die = new Dice(20);
         die.setRoll(0);
-        int expected = 20;
+        int expected = 1;
         assertEquals(expected, die.getRoll());
     }
     @Test
