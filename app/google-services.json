@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "268293404257",
+    "project_id": "corvus-df3ee",
+    "storage_bucket": "corvus-df3ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268293404257:android:9fc3577d826cc49a9d1c20",
+        "android_client_info": {
+          "package_name": "com.example.dndv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268293404257-2vjve8fetlt4ond8k4342t51g09ftuer.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGdAnA5p-jgbZS_ksMkSq1DccMVwduuwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268293404257-2vjve8fetlt4ond8k4342t51g09ftuer.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
