@@ -1,6 +1,8 @@
 package com.example.dndv2;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -94,26 +96,32 @@ public class Character
 
     public void setStr(int str) {
         this.str = str;
+        this.stats[0] = str;
     }
 
     public void setDex(int dex) {
         this.dex = dex;
+        this.stats[1] = dex;
     }
 
     public void setCon(int con) {
         this.con = con;
+        this.stats[2] = con;
     }
 
     public void setIntel(int intel) {
         this.intel = intel;
+        this.stats[3] = intel;
     }
 
     public void setWis(int wis) {
         this.wis = wis;
+        this.stats[4] = wis;
     }
 
     public void setCha(int cha) {
         this.cha = cha;
+        this.stats[5] = cha;
     }
 
     public void setStats(int[] stats) {
@@ -123,8 +131,21 @@ public class Character
         this.intel = stats[3];
         this.wis = stats[4];
         this.cha = stats[5];
+        for(int i = 0; i < stats.length; i++)
+        {
+            this.stats[i] = stats[i];
+        }
     }
 
+    public static boolean checkName(String name)
+    {
+        boolean output = false;
+        if(name.matches("[A-Za-z]+"))
+        {
+            output = true;
+        }
+       return output;
+    }
     public static int rollStat()
     {
         int stat = 0;
