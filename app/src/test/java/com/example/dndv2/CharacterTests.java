@@ -20,6 +20,7 @@ public class CharacterTests
         String output = "";
         output += "-----Sam Smorkle----";
         output += "\nlevel: " + 1;
+        output += "\nhp: " + character.getTemphp() + "/" + character.getHp() + " | ac: " + character.getAc();
         output += "\nstr: " + character.getStr() + "\tdex: " + character.getDex() + "\tcon: " + character.getCon();
         output += "\nint: " + character.getIntel() + "\twis: " + character.getWis() + "\tcha: " + character.getCha();
         assertEquals(output, character.toString());
@@ -31,6 +32,7 @@ public class CharacterTests
         String output = "";
         output += "-----Cedar----";
         output += "\nlevel: " + 1;
+        output += "\nhp: " + character.getTemphp() + "/" + character.getHp() + " | ac: " + character.getAc();
         output += "\nstr: " + character.getStr() + "\tdex: " + character.getDex() + "\tcon: " + character.getCon();
         output += "\nint: " + character.getIntel() + "\twis: " + character.getWis() + "\tcha: " + character.getCha();
         assertEquals(output, character.toString());
@@ -42,6 +44,7 @@ public class CharacterTests
         String output = "";
         output += "-----Cedar----";
         output += "\nlevel: " + 5;
+        output += "\nhp: " + character.getTemphp() + "/" + character.getHp() + " | ac: " + character.getAc();
         output += "\nstr: " + character.getStr() + "\tdex: " + character.getDex() + "\tcon: " + character.getCon();
         output += "\nint: " + character.getIntel() + "\twis: " + character.getWis() + "\tcha: " + character.getCha();
         assertEquals(output, character.toString());
@@ -53,6 +56,7 @@ public class CharacterTests
         String output = "";
         output += "-----Cedar----";
         output += "\nlevel: " + 5;
+        output += "\nhp: " + character.getTemphp() + "/" + character.getHp() + " | ac: " + character.getAc();
         output += "\nstr: " + stats[0] + "\tdex: " + stats[1] + "\tcon: " + stats[2];
         output += "\nint: " + stats[3] + "\twis: " + stats[4] + "\tcha: " + stats[5];
         assertEquals(output, character.toString());
@@ -73,6 +77,30 @@ public class CharacterTests
         character.setLevel(10);
         int expected = 10;
         assertEquals(expected, character.getLevel());
+    }
+    @Test
+    public void hpGetNSet()
+    {
+        Character character = new Character();
+        character.setHp(43);
+        int expected = 43;
+        assertEquals(expected, character.getHp());
+    }
+    @Test
+    public void tempHpGetNSet()
+    {
+        Character character = new Character();
+        character.setTemphp(43);
+        int expected = 43;
+        assertEquals(expected, character.getTemphp());
+    }
+    @Test
+    public void acGetNSet()
+    {
+        Character character = new Character();
+        character.setAc(12);
+        int expected = 12;
+        assertEquals(expected, character.getAc());
     }
     @Test
     public void strGetNSet()

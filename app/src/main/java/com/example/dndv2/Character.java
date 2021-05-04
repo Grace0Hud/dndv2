@@ -11,7 +11,7 @@ public class Character
     static Dice d6 = new Dice(6);
     static Dice d8 = new Dice(8);
     private String name;
-    private int level, hp, ac, str, dex, con, intel, wis, cha;
+    private int level, hp, temphp, ac, str, dex, con, intel, wis, cha;
     private int[] stats = {str, dex, con, intel, wis, cha};
 
     public  Character()
@@ -41,23 +41,41 @@ public class Character
 
     private void setUp()
     {
-        for(int i = 0; i < stats.length; i++)
-        {
-            stats[i] = rollStat();
-        }
+        setStr(rollStat());
+        setDex(rollStat());
+        setCon(rollStat());
+        setIntel(rollStat());
+        setWis(rollStat());
+        setCha(rollStat());
+        updateACHP();
+    }
+
+    private void updateACHP() {
         hp = d8.roll(level) + findMod(con);
+        temphp = hp;
+        ac = 10 + findMod(dex);
     }
 
 
     //getters
-
-
     public String getName() {
         return name;
     }
 
     public int getLevel() {
         return level;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getTemphp() {
+        return temphp;
+    }
+
+    public int getAc() {
+        return ac;
     }
 
     public int getStr() {
@@ -88,13 +106,25 @@ public class Character
         return stats;
     }
 
+    //setters
     public void setName(String name) {
         this.name = name;
     }
 
-    //setters
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void setAc(int ac) {
+        this.ac = ac;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setTemphp(int temphp) {
+        this.temphp = temphp;
     }
 
     public void setStr(int str) {
@@ -138,6 +168,7 @@ public class Character
         {
             this.stats[i] = stats[i];
         }
+        updateACHP();
     }
 
     public static boolean checkName(String name)
@@ -196,6 +227,7 @@ public class Character
         String output = "";
         output += "-----" + name + "----";
         output += "\nlevel: " + level;
+        output += "\nhp: " + temphp + "/" + hp + " | ac: " + ac;
         output += "\nstr: " + str + "\tdex: " + dex + "\tcon: " + con;
         output += "\nint: " + intel + "\twis: " + wis + "\tcha: " + cha;
         return output;
