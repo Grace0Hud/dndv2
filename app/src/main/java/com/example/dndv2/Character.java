@@ -9,8 +9,9 @@ import java.util.ArrayList;
 public class Character
 {
     static Dice d6 = new Dice(6);
+    static Dice d8 = new Dice(8);
     private String name;
-    private int level, str, dex, con, intel, wis, cha;
+    private int level, hp, ac, str, dex, con, intel, wis, cha;
     private int[] stats = {str, dex, con, intel, wis, cha};
 
     public  Character()
@@ -44,7 +45,9 @@ public class Character
         {
             stats[i] = rollStat();
         }
+        hp = d8.roll(level) + findMod(con);
     }
+
 
     //getters
 
@@ -169,6 +172,24 @@ public class Character
         Log.i("final stat:", String.valueOf(stat));
         return stat;
 
+    }
+    public static int findMod(int stat)
+    {
+        int mod = 0;
+        if(stat < 10)
+        {
+            for(int i = 10; i > stat; i-=2)
+            {
+                mod--;
+            }
+        }else
+        {
+            for(int i = 10; i < stat; i+=2)
+            {
+                mod++;
+            }
+        }
+        return mod;
     }
     public String toString()
     {

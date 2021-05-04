@@ -12,6 +12,7 @@ public class CharacterTests
         int stat = Character.rollStat();
         assertTrue(stat < 20 && stat > 2);
     }
+    //constructors
     @Test
     public void defaultConstr()
     {
@@ -56,6 +57,7 @@ public class CharacterTests
         output += "\nint: " + stats[3] + "\twis: " + stats[4] + "\tcha: " + stats[5];
         assertEquals(output, character.toString());
     }
+    //getters and setters
     @Test
     public void nameGetNSet()
     {
@@ -184,4 +186,23 @@ public class CharacterTests
                 character.getIntel(), character.getWis(), character.getCha()};
         assertArrayEquals(stats, actualStats);
     }
+    @Test
+    public void findModLessThan10()
+    {
+        int expected = -1;
+        assertEquals(expected, Character.findMod(9));
+    }
+    @Test
+    public void findModMoreThan10()
+    {
+        int expected = 2;
+        assertEquals(expected, Character.findMod(14));
+    }
+    @Test
+    public void findModEquals10()
+    {
+        int expected = 0;
+        assertEquals(expected, Character.findMod(10));
+    }
+
 }
