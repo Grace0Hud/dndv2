@@ -27,6 +27,7 @@ import com.google.firebase.ktx.Firebase;
 
 import java.lang.invoke.ConstantCallSite;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * link to kaban board: https://docs.google.com/spreadsheets/d/1bDCZd-A317ZPMwXX4LJmkg1AMy7mqXyuz8Pd6ddEv6Y/edit#gid=0
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity
                     {
                         if(task.isSuccessful())
                         {
+                            currentUserID = Objects.requireNonNull(mAuth.getCurrentUser().getUid());
                             Toast.makeText(MainActivity.this, "login successful", Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();
                         }
@@ -246,13 +248,13 @@ public class MainActivity extends AppCompatActivity
     private void createCharacter(String name)
     {
         loadingbar("Creating new Character: " + name, "Please wait while your character is created");
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         Log.e("crash?", "----------4------------");
-       userRef = FirebaseDatabase.getInstance().getReference("User");
+       userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         Log.e("crash?", "----------5------------");
         Character player = new Character(name);
-        userRef.child("Users").child(uid).setValue(player).addOnCompleteListener(new OnCompleteListener() {
+        userRef.child(currentUserID).setValue(player).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful())
