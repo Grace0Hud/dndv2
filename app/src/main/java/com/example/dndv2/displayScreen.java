@@ -12,7 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,13 +37,16 @@ public class displayScreen extends AppCompatActivity
     private DatabaseReference userRef;
     private EditText nameET;
     private ProgressDialog loadingbar;
+    String currentUserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_screen);
+        loadingbar = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference().child("Characters");
+        currentUserID = mAuth.getCurrentUser().getUid();
     }
     
     @Override
@@ -94,18 +101,18 @@ public class displayScreen extends AppCompatActivity
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         Log.e("crash?", "------5-------");
-        nameET = (EditText)findViewById(R.id.name);
-        String name = String.valueOf(nameET.getText());
         // set prompts.xml to be the layout file of the alertdialog builder
         alertDialogBuilder.setView(promptView);
 
         Log.e("crash?", "------6-------");
         // setup a dialog window
+        nameET = (EditText)promptView.findViewById(R.id.name);
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        String name = String.valueOf(nameET.getText());
+                        createCharcter(name);
                         dialog.cancel();
                     }
                 })
@@ -120,6 +127,38 @@ public class displayScreen extends AppCompatActivity
         AlertDialog alertD = alertDialogBuilder.create();
 
         alertD.show();
+    }
+
+    private void createCharcter(String name)
+    {
+        loadingbar("Creating new Character: " + name, "Please wait while your character is created");
+
+
+        Log.e("crash?", "----------4------------");
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        Log.e("crash?", "----------5------------");
+        Character player = new Character(name);
+        userRef.child(currentUserID).setValue(player).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful())
+                {
+                    Log.e("crash?", "----------6------------");
+                    Toast.makeText(displayScreen.this, "character created!", Toast.LENGTH_SHORT).show();
+                    loadingbar.dismiss();
+                }
+                else
+                {
+                    errorMessage(task);
+                }
+            }
+        });
+    }
+
+    private void errorMessage(@NonNull Task<AuthResult> task) {
+        String message = task.getException().getMessage();
+        Toast.makeText(displayScreen.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+        loadingbar.dismiss();
     }
 
     private void sendUserToLogin()
