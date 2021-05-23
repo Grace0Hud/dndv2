@@ -68,16 +68,13 @@ public class displayScreen extends AppCompatActivity
 
     private void checkUserExistance()
     {
-        final String currentUserID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-        Log.e("crash?", "------2-------");
+
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot)
             {
-                Log.e("crash?", "------3-------");
                 if(!snapshot.hasChild(currentUserID))
                 {
-                    Log.e("crash?", "------4-------");
                     namePopup();
                 }
             }
@@ -86,7 +83,7 @@ public class displayScreen extends AppCompatActivity
             public void onCancelled(@NonNull @NotNull DatabaseError error)
             {
                 String message = error.getMessage();
-                Log.e("crash?", message);
+                Toast.makeText(displayScreen.this, "Firebase error: " + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -100,11 +97,9 @@ public class displayScreen extends AppCompatActivity
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        Log.e("crash?", "------5-------");
         // set prompts.xml to be the layout file of the alertdialog builder
         alertDialogBuilder.setView(promptView);
 
-        Log.e("crash?", "------6-------");
         // setup a dialog window
         nameET = (EditText)promptView.findViewById(R.id.name);
         alertDialogBuilder
@@ -134,16 +129,13 @@ public class displayScreen extends AppCompatActivity
         loadingbar("Creating new Character: " + name, "Please wait while your character is created");
 
 
-        Log.e("crash?", "----------4------------");
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        Log.e("crash?", "----------5------------");
+        userRef = FirebaseDatabase.getInstance().getReference().child("Characters");
         Character player = new Character(name);
         userRef.child(currentUserID).setValue(player).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful())
                 {
-                    Log.e("crash?", "----------6------------");
                     Toast.makeText(displayScreen.this, "character created!", Toast.LENGTH_SHORT).show();
                     loadingbar.dismiss();
                 }
