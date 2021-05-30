@@ -21,8 +21,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
 
 import java.lang.invoke.ConstantCallSite;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * link to kaban board: https://docs.google.com/spreadsheets/d/1bDCZd-A317ZPMwXX4LJmkg1AMy7mqXyuz8Pd6ddEv6Y/edit#gid=0
@@ -36,8 +41,10 @@ public class MainActivity extends AppCompatActivity
     boolean signUpFinished = false;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference userRef;
     private ProgressDialog loadingbar;
     Button signin, signup;
+    String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+
         loadingbar = new ProgressDialog(this);
 
         Button signup = (Button) findViewById(R.id.signupbtn);
@@ -81,28 +89,30 @@ public class MainActivity extends AppCompatActivity
         }
         else
         {
-            loadingbar("Signing you In", "Please wait as you are logged in");
-            mAuth.signInWithEmailAndPassword(enteredEmail, enteredPass)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>()
-                    {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
-                        {
-                            if(task.isSuccessful())
-                            {
-                                toDisplayScreen();
-                                Toast.makeText(MainActivity.this, "login successful", Toast.LENGTH_SHORT).show();
-                                loadingbar.dismiss();
-                            }
-                            else
-                            {
-                                String message = task.getException().getMessage();
-                                Toast.makeText(MainActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                                loadingbar.dismiss();
-                            }
-                        }
-                    });
+           login(enteredEmail,enteredPass);
         }
+    }
+
+    private void login(String enteredEmail, String enteredPass) {
+        loadingbar("Signing you In", "Please wait as you are logged in");
+        mAuth.signInWithEmailAndPassword(enteredEmail, enteredPass)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            toDisplayScreen();
+                            Toast.makeText(MainActivity.this, "login successful", Toast.LENGTH_SHORT).show();
+                            loadingbar.dismiss();
+                        }
+                        else
+                        {
+                            errorMessage(task);
+                        }
+                    }
+                });
     }
 
     private void toDisplayScreen()
@@ -114,7 +124,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void changeScreen()//changes screen after player wins
+    public void changeScreen()
     {
         //opens up a dialogue box instead of a layout for the win screen
         LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -161,7 +171,6 @@ public class MainActivity extends AppCompatActivity
         String newEmail = signupEmailET.getText().toString();
         String newPass = signupPassET.getText().toString();
         String retypePass = signUpREPassET.getText().toString();
-        String newName = signUpNameET.getText().toString();
 
 
         if(TextUtils.isEmpty(newEmail))
@@ -180,10 +189,6 @@ public class MainActivity extends AppCompatActivity
         {
             Toast.makeText(this, "password and retype password must match", Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(newName))
-        {
-            Toast.makeText(this, "must enter a name", Toast.LENGTH_SHORT).show();
-        }
         else
         {
             loadingbar("Creating New Account", "Please wait while your account is being created");
@@ -195,18 +200,50 @@ public class MainActivity extends AppCompatActivity
                     if(task.isSuccessful())
                     {
                         Toast.makeText(MainActivity.this, "account created", Toast.LENGTH_SHORT).show();
+                        login(newEmail, newPass);
                         loadingbar.dismiss();
                     }
                     else
                     {
-                        String message = task.getException().getMessage();
-                        Toast.makeText(MainActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                        loadingbar.dismiss();
+                        errorMessage(task);
                     }
                 }
             });
         }
     }
+
+    private void errorMessage(@NonNull Task<AuthResult> task) {
+        String message = task.getException().getMessage();
+        Toast.makeText(MainActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+        loadingbar.dismiss();
+    }
+
+//    private void createCharacter(String name)
+//    {
+//        loadingbar("Creating new Character: " + name, "Please wait while your character is created");
+//
+//
+//        Log.e("crash?", "----------4------------");
+//       userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+//        Log.e("crash?", "----------5------------");
+//        Character player = new Character(name);
+//        userRef.child(currentUserID).setValue(player).addOnCompleteListener(new OnCompleteListener() {
+//            @Override
+//            public void onComplete(@NonNull Task task) {
+//                if(task.isSuccessful())
+//                {
+//                    toDisplayScreen();
+//                    Log.e("crash?", "----------6------------");
+//                    Toast.makeText(MainActivity.this, "character created!", Toast.LENGTH_SHORT).show();
+//                    loadingbar.dismiss();
+//                }
+//                else
+//                {
+//                    errorMessage(task);
+//                }
+//            }
+//        });
+//    }
 
     public void loadingbar(String title, String message)
     {

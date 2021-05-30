@@ -12,7 +12,7 @@ public class Character
     static Dice d8 = new Dice(8);
     private String name;
     private int level, hp, temphp, ac, str, dex, con, intel, wis, cha;
-    private int[] stats = {str, dex, con, intel, wis, cha};
+   // private int[] stats = {str, dex, con, intel, wis, cha};
 
     public  Character()
     {
@@ -102,9 +102,8 @@ public class Character
         return cha;
     }
 
-    public int[] getStats() {
-        return stats;
-    }
+
+    //public int[] getStats() { return stats; }
 
     //setters
     public void setName(String name) {
@@ -129,32 +128,32 @@ public class Character
 
     public void setStr(int str) {
         this.str = str;
-        this.stats[0] = str;
+        //this.stats[0] = str;
     }
 
     public void setDex(int dex) {
         this.dex = dex;
-        this.stats[1] = dex;
+        //this.stats[1] = dex;
     }
 
     public void setCon(int con) {
         this.con = con;
-        this.stats[2] = con;
+       // this.stats[2] = con;
     }
 
     public void setIntel(int intel) {
         this.intel = intel;
-        this.stats[3] = intel;
+        //this.stats[3] = intel;
     }
 
     public void setWis(int wis) {
         this.wis = wis;
-        this.stats[4] = wis;
+        //this.stats[4] = wis;
     }
 
     public void setCha(int cha) {
         this.cha = cha;
-        this.stats[5] = cha;
+       // this.stats[5] = cha;
     }
 
     public void setStats(int[] stats) {
@@ -164,10 +163,13 @@ public class Character
         this.intel = stats[3];
         this.wis = stats[4];
         this.cha = stats[5];
+        /*
         for(int i = 0; i < stats.length; i++)
         {
             this.stats[i] = stats[i];
         }
+
+         */
         updateACHP();
     }
 
