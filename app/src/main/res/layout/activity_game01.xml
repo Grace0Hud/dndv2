@@ -10,24 +10,26 @@
 
     <ImageView
         android:id="@+id/corvusLogo"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="130dp"
-        app:srcCompat="@drawable/corvuslogotransparent"
-        android:contentDescription="@string/logo_description"/>
+        android:contentDescription="@string/logo_description"
+        app:srcCompat="@drawable/corvuslogotransparent" />
 
 
     <Space
         android:layout_width="1dp"
-        android:layout_height="300dp"/>
+        android:layout_height="200dp"/>
 
     <TextView
         android:id="@+id/nameofspeaker"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/dark_byzantium"
         android:fontFamily="@font/beyond_wonderland"
-        android:text="  name"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="50sp" />
 
@@ -36,8 +38,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:textSize="30sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="25sp"
         android:textColor="@color/white"
         android:fontFamily="@font/berner_basisschrift1"
-        android:text="  words they are saying" />
+        android:text=""
+        android:layout_marginRight="10dp" />
+    <Button
+        android:id="@+id/nextbtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/berner_basisschrift1"
+        android:text="Next"
+        android:backgroundTint="@color/eggplant"
+        android:textColor="@color/light_grey"
+        android:textSize="40sp"
+        android:layout_marginRight="10dp" />
 </LinearLayout>

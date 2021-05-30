@@ -150,61 +150,61 @@ public class CharacterTests
         int expected = 10;
         assertEquals(expected, character.getCha());
     }
-    @Test
-    public void statsStrUpdate()
-    {
-        Character character = new Character();
-        character.setStr(10);
-        int expected = 10;
-        assertEquals(expected, character.getStats()[0]);
-    }
-    @Test
-    public void statsDexUpdate()
-    {
-        Character character = new Character();
-        character.setDex(10);
-        int expected = 10;
-        assertEquals(expected, character.getStats()[1]);
-    }
-    @Test
-    public void statsConUpdate()
-    {
-        Character character = new Character();
-        character.setCon(10);
-        int expected = 10;
-        assertEquals(expected, character.getStats()[2]);
-    }
-    @Test
-    public void statsIntUpdate()
-    {
-        Character character = new Character();
-        character.setIntel(10);
-        int expected = 10;
-        assertEquals(expected, character.getStats()[3]);
-    }
-    @Test
-    public void statsWisUpdate()
-    {
-        Character character = new Character();
-        character.setWis(10);
-        int expected = 10;
-        assertEquals(expected, character.getStats()[4]);
-    }
-    @Test
-    public void statsChaUpdate()
-    {
-        Character character = new Character();
-        character.setCha(10);
-        int expected = 10;
-        assertEquals(expected, character.getStats()[5]);
-    }
-    @Test
-    public void statsUpdate()
-    {
-        Character character = new Character();
-        character.setStats(stats);
-        assertArrayEquals(stats, character.getStats());
-    }
+//    @Test
+//    public void statsStrUpdate()
+//    {
+//        Character character = new Character();
+//        character.setStr(10);
+//        int expected = 10;
+//        assertEquals(expected, character.getStats()[0]);
+//    }
+//    @Test
+//    public void statsDexUpdate()
+//    {
+//        Character character = new Character();
+//        character.setDex(10);
+//        int expected = 10;
+//        assertEquals(expected, character.getStats()[1]);
+//    }
+//    @Test
+//    public void statsConUpdate()
+//    {
+//        Character character = new Character();
+//        character.setCon(10);
+//        int expected = 10;
+//        assertEquals(expected, character.getStats()[2]);
+//    }
+//    @Test
+//    public void statsIntUpdate()
+//    {
+//        Character character = new Character();
+//        character.setIntel(10);
+//        int expected = 10;
+//        assertEquals(expected, character.getStats()[3]);
+//    }
+//    @Test
+//    public void statsWisUpdate()
+//    {
+//        Character character = new Character();
+//        character.setWis(10);
+//        int expected = 10;
+//        assertEquals(expected, character.getStats()[4]);
+//    }
+//    @Test
+//    public void statsChaUpdate()
+//    {
+//        Character character = new Character();
+//        character.setCha(10);
+//        int expected = 10;
+//        assertEquals(expected, character.getStats()[5]);
+//    }
+//    @Test
+//    public void statsUpdate()
+//    {
+//        Character character = new Character();
+//        character.setStats(stats);
+//        assertArrayEquals(stats, character.getStats());
+//    }
     @Test
     public void statsUpdateIndivdualStats()
     {
