@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class displayScreen extends AppCompatActivity
 {
 
     Character userChar;
+    Button startBtn;
     int[] userstats = new int[6];
     private FirebaseAuth mAuth;
     private DatabaseReference userRef;
@@ -66,8 +68,24 @@ public class displayScreen extends AppCompatActivity
         chaDisplay = (TextView)findViewById(R.id.chaDisplay);
         classLevel = (TextView)findViewById(R.id.classLevelDisplay);
         hpAc = (TextView)findViewById(R.id.hpacdisplay);
+
+        startBtn = findViewById(R.id.startbtn);
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeScreen();
+            }
+        });
     }
-    
+
+    private void changeScreen()
+    {
+        Intent intent = new Intent(this, com.example.dndv2.game01.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("Character", userChar);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onStart()
     {
