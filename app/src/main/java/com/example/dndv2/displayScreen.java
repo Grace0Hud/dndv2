@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,17 +28,23 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.Objects;
 
 public class displayScreen extends AppCompatActivity 
 {
 
+    Character userChar;
+    int[] userstats = new int[6];
     private FirebaseAuth mAuth;
     private DatabaseReference userRef;
     private EditText nameET;
     private ProgressDialog loadingbar;
+    private FirebaseDatabase database;
     String currentUserID;
+    TextView nameDisplay, strDisplay, dexDisplay, conDisplay,
+            intDisplay, wisDisplay, chaDisplay, classLevel, hpAc;
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
@@ -47,6 +54,18 @@ public class displayScreen extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference().child("Characters");
         currentUserID = mAuth.getCurrentUser().getUid();
+        database = FirebaseDatabase.getInstance();
+
+        //displayTVs
+        nameDisplay = (TextView)findViewById(R.id.usernameDisplay);
+        strDisplay = (TextView)findViewById(R.id.strDisplay);
+        dexDisplay = (TextView)findViewById(R.id.dexDisplay);
+        conDisplay = (TextView)findViewById(R.id.conDisplay);
+        intDisplay = (TextView)findViewById(R.id.intDisplay);
+        wisDisplay = (TextView)findViewById(R.id.wisDisplay);
+        chaDisplay = (TextView)findViewById(R.id.chaDisplay);
+        classLevel = (TextView)findViewById(R.id.classLevelDisplay);
+        hpAc = (TextView)findViewById(R.id.hpacdisplay);
     }
     
     @Override
@@ -77,6 +96,17 @@ public class displayScreen extends AppCompatActivity
                 {
                     namePopup();
                 }
+
+                userChar = Objects.requireNonNull(snapshot.child(currentUserID).getValue(Character.class));
+                nameDisplay.setText(userChar.getName());
+                classLevel.setText("Level:" + userChar.getLevel());
+                strDisplay.setText(userChar.getStr() + " STR");
+                dexDisplay.setText(userChar.getDex() + " DEX");
+                conDisplay.setText(userChar.getCon() + " CON");
+                intDisplay.setText(userChar.getIntel() + " INT");
+                wisDisplay.setText(userChar.getWis() + " WIS");
+                chaDisplay.setText(userChar.getCha() + " CHA");
+                hpAc.setText(userChar.getHp() + " HP | " + userChar.getAc() + " AC");
             }
 
             @Override
