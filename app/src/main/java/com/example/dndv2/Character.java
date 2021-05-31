@@ -233,6 +233,11 @@ public class Character implements Serializable
         }
         return mod;
     }
+
+    public static boolean checkEmail(String email)
+    {
+        return email.matches("[A-Za-z0-9]+@[a-z]+\\.(com|net|edu)");
+    }
     public String toString()
     {
         String output = "";
