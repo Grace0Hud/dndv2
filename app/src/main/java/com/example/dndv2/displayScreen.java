@@ -152,16 +152,16 @@ public class displayScreen extends AppCompatActivity
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String name = String.valueOf(nameET.getText());
-                        if(Character.checkName(name))
+                        if(!Character.checkName(name))
                         {
-                            createCharcter(name);
+                            Toast.makeText(displayScreen.this, "Your name must contain only letters", Toast.LENGTH_SHORT).show();
+                            namePopup();
                         }
                         else
                         {
-                            Toast.makeText(displayScreen.this, "Your name must contain only letters", Toast.LENGTH_SHORT).show();
+                            createCharcter(name);
+                            dialog.cancel();
                         }
-
-                        dialog.cancel();
                     }
                 })
                 .setNegativeButton("Cancel",
