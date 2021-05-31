@@ -232,5 +232,25 @@ public class CharacterTests
         int expected = 0;
         assertEquals(expected, Character.findMod(10));
     }
+    @Test
+    public void nameRegexFalse()
+    {
+        assertFalse(Character.checkName("56dsaf"));
+    }
+    @Test
+    public void nameRegexTrue()
+    {
+        assertTrue(Character.checkName("name"));
+    }
+    @Test
+    public void emailRegexFalse()
+    {
+        assertFalse(Character.checkEmail("name"));
+    }
+    @Test
+    public void emailRegexTrue()
+    {
+        assertTrue(Character.checkEmail("name@email.com"));
+    }
 
 }

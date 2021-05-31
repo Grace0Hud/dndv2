@@ -173,9 +173,9 @@ public class MainActivity extends AppCompatActivity
         String retypePass = signUpREPassET.getText().toString();
 
 
-        if(TextUtils.isEmpty(newEmail))
+        if(!Character.checkEmail(newEmail))
         {
-            Toast.makeText(this, "must enter an email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "not a valid email", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(newPass))
         {
