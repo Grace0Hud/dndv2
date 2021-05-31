@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class displayScreen extends AppCompatActivity
 {
 
     Character userChar;
+    Button startBtn;
     int[] userstats = new int[6];
     private FirebaseAuth mAuth;
     private DatabaseReference userRef;
@@ -66,8 +68,24 @@ public class displayScreen extends AppCompatActivity
         chaDisplay = (TextView)findViewById(R.id.chaDisplay);
         classLevel = (TextView)findViewById(R.id.classLevelDisplay);
         hpAc = (TextView)findViewById(R.id.hpacdisplay);
+
+        startBtn = findViewById(R.id.startbtn);
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeScreen();
+            }
+        });
     }
-    
+
+    private void changeScreen()
+    {
+        Intent intent = new Intent(this, com.example.dndv2.game01.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("Character", userChar);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onStart()
     {
@@ -96,18 +114,15 @@ public class displayScreen extends AppCompatActivity
                 {
                     namePopup();
                 }
+                else
+                {
+                    userChar = Objects.requireNonNull(snapshot.child(currentUserID).getValue(Character.class));
+                    updateTV(userChar);
+                }
 
-                userChar = Objects.requireNonNull(snapshot.child(currentUserID).getValue(Character.class));
-                nameDisplay.setText(userChar.getName());
-                classLevel.setText("Level:" + userChar.getLevel());
-                strDisplay.setText(userChar.getStr() + " STR");
-                dexDisplay.setText(userChar.getDex() + " DEX");
-                conDisplay.setText(userChar.getCon() + " CON");
-                intDisplay.setText(userChar.getIntel() + " INT");
-                wisDisplay.setText(userChar.getWis() + " WIS");
-                chaDisplay.setText(userChar.getCha() + " CHA");
-                hpAc.setText(userChar.getHp() + " HP | " + userChar.getAc() + " AC");
             }
+
+
 
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error)
@@ -137,8 +152,16 @@ public class displayScreen extends AppCompatActivity
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String name = String.valueOf(nameET.getText());
-                        createCharcter(name);
-                        dialog.cancel();
+                        if(!Character.checkName(name))
+                        {
+                            Toast.makeText(displayScreen.this, "Your name must contain only letters", Toast.LENGTH_SHORT).show();
+                            namePopup();
+                        }
+                        else
+                        {
+                            createCharcter(name);
+                            dialog.cancel();
+                        }
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -167,6 +190,7 @@ public class displayScreen extends AppCompatActivity
                 if(task.isSuccessful())
                 {
                     Toast.makeText(displayScreen.this, "character created!", Toast.LENGTH_SHORT).show();
+                    updateTV(player);
                     loadingbar.dismiss();
                 }
                 else
@@ -177,6 +201,17 @@ public class displayScreen extends AppCompatActivity
         });
     }
 
+    private void updateTV(Character userChar) {
+        nameDisplay.setText(userChar.getName());
+        classLevel.setText("Level:" + userChar.getLevel());
+        strDisplay.setText(userChar.getStr() + " STR");
+        dexDisplay.setText(userChar.getDex() + " DEX");
+        conDisplay.setText(userChar.getCon() + " CON");
+        intDisplay.setText(userChar.getIntel() + " INT");
+        wisDisplay.setText(userChar.getWis() + " WIS");
+        chaDisplay.setText(userChar.getCha() + " CHA");
+        hpAc.setText(userChar.getHp() + " HP | " + userChar.getAc() + " AC");
+    }
     private void errorMessage(@NonNull Task<AuthResult> task) {
         String message = task.getException().getMessage();
         Toast.makeText(displayScreen.this, "Error: " + message, Toast.LENGTH_SHORT).show();

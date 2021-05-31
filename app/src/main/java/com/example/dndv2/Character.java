@@ -4,9 +4,11 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Character
+@SuppressWarnings("serial")
+public class Character implements Serializable
 {
     static Dice d6 = new Dice(6);
     static Dice d8 = new Dice(8);
@@ -51,7 +53,14 @@ public class Character
     }
 
     private void updateACHP() {
-        hp = d8.roll(level) + findMod(con);
+        if(level ==1)
+        {
+            hp = 8 + findMod(con);
+        }
+        else
+        {
+            hp = 8 + d8.roll(level) + findMod(con);
+        }
         temphp = hp;
         ac = 10 + findMod(dex);
     }
